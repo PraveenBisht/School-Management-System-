@@ -1,0 +1,506 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+<style>
+    #form {
+        background-color: #e2dcdc;
+        padding: 10px;
+    }
+</style>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<div class="col-md-12" style="text-align:center;">
+    <h4>Registration Form</h4>
+</div>
+<hr />
+<form class="form-group" method="POST">
+    <div class="row">
+        <div class="col-md-1">
+        </div>
+        <div class="col-md-10">
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Enter First Name :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" id="txtName" class="form-control" style="float: left;" name="txtName" />
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Enter Last Name :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" id="txtLastName" class="form-control" style="float: left;" name="txtLastName" />
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Enter Password :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="password" id="txtPassword" class="form-control" style="float: left;" />
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Retype Password :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" id="txtRePassword" class="form-control" style="float: left;" />
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Enter DOB :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="date" id="txtDOB" class="form-control" name="txtDOB" style="float: left;" />
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Enter EmailId :</label>
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-8" style="margin-left: -15px;">
+                        <input type="text" id="txtEmailId" class="form-control " name="txtEmailId" />
+                    </div>
+                    <div class="col-md-8" style="margin-left: -15px;">
+                        <input type="button" id="btnEmail" class="btn btn-success bt-sm " value="Varify">
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Enter Phone No :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" id="txtPhoneNo" class="form-control allownumericwithoutdecimal" name="txtPhoneNo" style="float: left;" />
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Enter Address :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" id="txtAddress" class="form-control" name="txtAddress" style="float: left;" />
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Enter Select Profile Pic :</label>
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-6" style="margin-left: -15px;">
+                        <input type="file" id="ProfilePic" class="form-control col-md-8" onchange="ProfilePicClick(event)" />
+                    </div>
+                    <div class="col-md-6">
+                        <img id="ImgProfile" class="Img2" width="50" height="50" style="margin-left: -12px;float: left;" />
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Please Enter Father Name :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="text" id="txtFatherName" class="form-control" style="float: left;" />
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Select Category :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="radio" name="group1" value="GENERAL" /> GENERAL &nbsp;
+                    <input type="radio" name="group1" value="SC" /> SC<br />
+                    <input type="radio" name="group1" value="ST" /> ST
+                    <input type="radio" style="margin-left: 57px;" name="group1" value="OBC" /> OBC<br /><p class="radiButtons"></p>
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Select Blood Group :</label>
+                </div>
+                <div class="col-md-8">
+                    <select id="ddlBloodGroup" name="ddlBloodGroup" class="form-control" style="float: left;">
+                        <option id="BloodGroup" value=" ">--Select Blood Group--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Select Subject :</label>
+                </div>
+                <div class="col-md-8">
+                    <select id="ddlSubject" name="ddlSubject" class="form-control" style="float: left;">
+                        <option id="Subject" value=" ">--Select Subject--</option>
+                    </select>
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Select Optional Subjects :</label>
+                </div>
+                <div class="col-md-8" style="float: left;">
+                    <p id="checkBoxes">
+                        <input type="checkbox" id="cb1" name="cb1" value="1" />
+                        <label for="Checkbox1">Hindi</label>
+                        <br />
+                        <input type="checkbox" id="cb2" value="2" />
+                        <label for="Checkbox2">English</label>
+                        <br />
+                        <input type="checkbox" id="cb3" value="3" />
+                        <label for="Checkbox3">Maths</label>
+                        <br />
+                        <input type="checkbox" id="cb4" value="4" />
+                        <label for="Checkbox4">Physics</label>
+                        <br />
+                    </p><p class="chkOptional" />
+                    <p id="status" />
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Upload Documents1 :</label>
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-6" style="margin-left: -15px;">
+                        <input type="file" id="UploadDocuments1" class="form-control UploadD1" onchange="UploadDocumentsClick(event)" />
+                    </div>
+                    <div class="col-md-6">
+                        <img id="Img1" class="Img1" width="50" height="50" style="margin-left: -12px;float: left;" />
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Upload Documents2 :</label>
+                </div>
+                <div class="col-md-8">
+                    <div class="col-md-6" style="margin-left: -15px;">
+                        <input type="file" id="UploadDocuments2" class="form-control UploadD2" onchange="UploadDocumentsClick2(event)" />
+                    </div>
+                    <div class="col-md-6">
+                        <img id="Img2" class="Img2" width="50" height="50" style="margin-left: -12px;float: left;" />
+                    </div>
+                </div>
+            </div>
+            <div class="row" style="margin: 3px;">
+                <div class="col-md-4">
+                    <label>Select Role :</label>
+                </div>
+                <div class="col-md-8">
+                    <input type="radio" name="group4" value="Student" /> Student &nbsp;
+                    <input type="radio" name="group4" value="Admin" /> Admin<br />
+                    <p class="radiButtons1"></p>
+                </div>
+                <div class="col-md-8" style="margin: 3px;">
+                    <input type="button" style="float:left" id="btnSubmit" class="btn btn-success" value="Submit">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-1">
+        </div>
+    </div>
+
+</form>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+<script>
+    $(".allownumericwithoutdecimal").on("keypress keyup blur", function (event) {
+        $(this).val($(this).val().replace(/[^\d].+/, ""));
+        if ((event.which < 48 || event.which > 57 || $(this).val().length >= 15)) {
+            event.preventDefault();
+        }
+    });
+    var ProfilePicClick = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('ProfilePic');
+            output.src = reader.result;
+            ImgProfile.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+    var UploadDocumentsClick = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('UploadDocuments1');
+            output.src = reader.result;
+            Img1.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+    var UploadDocumentsClick2 = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('UploadDocuments2');
+            output.src = reader.result;
+            Img2.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+    var cat = ''; var optionalSubject = ''; var RoleType = '';
+
+    $('#btnEmail').click(function () {
+        $(".error-div").remove();
+        $(".badge").remove();
+        var emailRegex = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+        var EmailId = $('#txtEmailId').val();
+        if (EmailId == '') {
+            $("#txtEmailId").focus();
+            $("#btnEmail").after('<span class="error-div "style="color: #ff0202;"> &nbsp*Please Enter the EmailId!</span>');
+            return false;
+        } else if (!emailRegex.test(EmailId)) {
+            $("#txtEmailId").focus();
+            $("#btnEmail").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter the valid Email!</span>');
+            return false;
+        }
+        var MailVatify = {
+            "EmailId": EmailId
+        };
+        $.ajax({
+            url: '/api/Student/MailVarify',
+            type: 'POST',
+            dataType: 'json',
+            data: MailVatify,
+            success: function (result, textStatus, xhr) {
+                if (result.Status == '1') {
+                    $("#btnEmail").after('<span class="badge badge-pill badge-primary">Varified!</span>');
+                    $('#txtEmailId').focus();
+                }
+                if (result.Status == '2') {
+                    $("#btnEmail").after('<span class="badge badge-pill badge-danger">Already Registered!</span>');
+                    $('#txtEmailId').focus();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+            }
+        });
+    });
+
+    $(document).ready(function () {
+        var rGrp = $("input[name=group1]");
+        rGrp.click(function () {
+            var checkedRadio = rGrp.filter(":checked");
+            //$("#status").text(checkedRadio.val());
+            cat = checkedRadio.val();
+        });
+        var rGrpRole = $("input[name=group4]");
+        rGrpRole.click(function () {
+            var checkedRole = rGrpRole.filter(":checked");
+            RoleType = checkedRole.val();
+        });
+
+        var cb = $("#checkBoxes input[type='checkbox']");
+        cb.on('click', function () {
+            var selected = [];
+            cb.each(function () {
+                if (this.checked) {
+                    selected.push($(this).next().text());
+                }
+            });
+            //$("#status").text(selected.join(','));
+            optionalSubject = selected.join(',');
+        });
+        var ddlBloodGroup = $('#ddlBloodGroup');
+        $.ajax({
+            url: '/api/Student/BloodGroupList',
+            type: 'GET',
+            dataType: 'json',
+            success: function (d) {
+                $.each(d, function (i, BloodGroup) {
+                    ddlBloodGroup.append($("<option></option>").val(BloodGroup.BloodGroupId).html(BloodGroup.BloodGroupName));
+                });
+            },
+            error: function () { }
+        });
+        var ddlSubject = $('#ddlSubject');
+        $.ajax({
+            url: '/api/Student/SubjectList',
+            type: 'GET',
+            dataType: 'json',
+            success: function (d) {
+                $.each(d, function (i, Subject) {
+                    ddlSubject.append($("<option></option>").val(Subject.SubjectId).html(Subject.SubjectName));
+                });
+            },
+            error: function () { }
+        });
+
+        $('#btnSubmit').click(function () {
+            var emailRegex = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+            var Name = $('#txtName').val();
+            var LastName = $('#txtLastName').val();
+            var Password = $('#txtPassword').val();
+            var RePassword = $('#txtRePassword').val();
+            var DOB = $('#txtDOB').val()
+            var EmailId = $('#txtEmailId').val();
+            var PhoneNo = $('#txtPhoneNo').val();
+            var Address = $('#txtAddress').val();
+            var FatherName = $('#txtFatherName').val();
+            var MailVarify = $('.badge').text();
+            var BloodGroup = $("#ddlBloodGroup :selected").text();
+            var BloodGroupId = $("#ddlBloodGroup :selected").val();
+            var Subject = $("#ddlSubject :selected").text();
+            var Optional = optionalSubject.split(",");
+            var Optional1 = ''; var Optional2 = ''; var Optional3 = ''; var Optional4 = '';
+            var SubjectId = $("#ddlSubject :selected").val();
+            $(".error-div").remove();
+            if (Name == '') {
+                $("#txtName").focus();
+                $("#txtName").after('<span class="error-div" style="color: #ff0202;">&nbsp*Please Enter Name!</span>');
+                return false;
+            } else if (LastName == '') {
+                $("#txtLastName").focus();
+                $("#txtLastName").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter Last Name!</span>');
+                return false;
+            } else if (Password == '') {
+                $("#txtPassword").focus();
+                $("#txtPassword").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Enter Password!</span>');
+                return false;
+            } else if (!passwordRegex.test(Password)) {
+                $("#txtPassword").focus();
+                $("#txtPassword").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Enter the valid Password!</span>');
+                return false;
+            }
+            else if (RePassword == '') {
+                $("#txtRePassword").focus();
+                $("#txtRePassword").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter RePassword!</span>');
+                return false;
+            } else if (!RePassword.match(Password)) {
+                $("#txtPassword").focus();
+                $("#txtPassword").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Password do not match!</span>');
+                return false;
+            }
+            else if (DOB == '') {
+                $("#txtDOB").focus();
+                $("#txtDOB").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter the DOB!</span>');
+                return false;
+            } else if (EmailId == '') {
+                $("#txtEmailId").focus();
+                $("#txtEmailId").after('<span class="error-div "style="color: #ff0202;"> &nbsp*Please Enter the EmailId!</span>');
+                return false;
+            } else if (!emailRegex.test(EmailId)) {
+                $("#txtEmailId").focus();
+                $("#txtEmailId").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter the valid Email!</span>');
+                return false;
+            } else if (MailVarify == '') {
+                $("#txtEmailId").focus(); $('.badge').text();
+                $("#btnEmail").after('<span class="error-div "style="color: #ff0202;"> &nbsp*Please Varify First!</span>');
+                return false;
+            } else if (!(MailVarify == 'Varified!')) {
+                $(".badge").remove();
+                $("#txtEmailId").focus(); $('.badge').text();
+                $("#btnEmail").after('<span class="error-div "style="color: #ff0202;"> &nbsp*Please Varify First!</span>');
+                return false;
+            }
+            else if (PhoneNo == '') {
+                $("#txtPhoneNo").focus();
+                $("#txtPhoneNo").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter the PhoneNumber!</span>');
+                return false;
+            }
+            else if (Address == '') {
+                $("#txtAddress").focus();
+                $("#txtAddress").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter the Address!</span>');
+                return false;
+            }
+            else if (ImgProfile.src.trim() == '') {
+                $(".Img2").focus();
+                $(".Img2").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Select Profile Pic!</span>');
+                return false;
+            }
+            else if (FatherName == '') {
+                $("#txtFatherName").focus();
+                $("#txtFatherName").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please enter Father Name!</span>');
+                return false;
+            }
+            else if (cat == '') {
+                $(".radiButtons").focus();
+                $(".radiButtons").after('<span class="error-div" style="color: #ff0202;">*Please Select Category!</span>');
+                return false;
+            }
+            else if (BloodGroup == '--Select Blood Group--' || BloodGroup.trim() == '') {
+                $("#ddlBloodGroup").focus();
+                $("#ddlBloodGroup").after('<span class="error-div" style="color: #ff0202;">*Please Select Blood Group!</span>');
+                return false;
+            }
+            else if (Subject == '--Select Subject--' || Subject.trim() == '') {
+                $("#ddlSubject").focus();
+                $("#ddlSubject").after('<span class="error-div" style="color: #ff0202;">*Please Select Subject!</span>');
+                return false;
+            }
+            else if (Optional[0] == '') {
+                $(".chkOptional").focus();
+                $(".chkOptional").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Select Optional Subject!</span>');
+                return false;
+            }
+            else if (Img1.src.trim() == '') {
+                $(".Img1").focus();
+                $(".Img1").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Upload Documents1!</span>');
+                return false;
+            } else if (Img2.src.trim() == '') {
+                $(".Img2").focus();
+                $(".Img2").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Upload Documents2!</span>');
+                return false;
+            } else if (RoleType == '') {
+                $(".radiButtons1").focus();
+                $(".radiButtons1").after('<span class="error-div" style="color: #ff0202;">*Please Select Role!</span>');
+                return false;
+            }
+            else if (Optional.length == 1) { Optional1 = Optional[0] }
+            else if (Optional.length == 2) { Optional1 = Optional[0]; Optional2 = Optional[1]; }
+            else if (Optional.length == 3) { Optional1 = Optional[0]; Optional2 = Optional[1]; Optional3 = Optional[2]; }
+            else if (Optional.length == 4) { Optional1 = Optional[0]; Optional2 = Optional[1]; Optional3 = Optional[2]; Optional4 = Optional[3]; }
+
+            var StudentData = {
+                "FirstName": Name,
+                "LastName": LastName,
+                "Password": Password,
+                "DOB": DOB,
+                "EmailId": EmailId,
+                "PhoneNo": PhoneNo,
+                "Address": Address,
+                "ProfilePic": ImgProfile.src.replace(/^data:(.*;base64,)?/, ''),
+                "FatherName": FatherName,
+                "BloodGroup": BloodGroup,
+                "category": cat,
+                "MainSubject": Subject,
+                "Obtional1": Optional1,
+                "Obtional2": Optional2,
+                "Obtional3": Optional3,
+                "Obtional4": Optional4,
+                "Document1": Img1.src.replace(/^data:(.*;base64,)?/, ''),
+                "Document2": Img2.src.replace(/^data:(.*;base64,)?/, ''),
+                "Role": RoleType,
+                "SubjectId": SubjectId, 
+                "BloodGroupId": BloodGroupId
+            };
+            optionalSubject = '';
+            $.ajax({
+                url: '/api/Student/InsertStudentsDetail',
+                type: 'POST',
+                dataType: 'json',
+                data: StudentData,
+                success: function (result, textStatus, xhr) {
+                    if (result.Status == '1') {
+                        $('#txtName').val('');
+                        alert("Successfully Submitted.");
+                        window.location.href = "/Home/UserProfile";
+                    }
+                    if (result.Status == '0') {
+                        $("#massage").text(result.Message);
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                }
+            });
+        });
+    });
+</script>
+
+
+

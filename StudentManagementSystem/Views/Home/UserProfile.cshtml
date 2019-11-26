@@ -1,0 +1,312 @@
+﻿@{
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+<style>
+    #form {
+        background-color: #e2dcdc;
+        padding: 10px;
+    }
+
+    .error {
+        color: red;
+    }
+    .image-container {
+        position: relative;
+    }
+
+    .image {
+        opacity: 1;
+        display: block;
+        width: 100%;
+        height: auto;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .middle {
+        transition: .5s ease;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        -ms-transform: translate(-50%, -50%);
+        text-align: center;
+    }
+
+    .image-container:hover .image {
+        opacity: 0.3;
+    }
+
+    .image-container:hover .middle {
+        opacity: 1;
+    }
+</style>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+@{ var data = Session["FirstName"] + " " + Session["LastName"]; }
+<div class="col-md-12" style="text-align:center;">
+    <h2>User Desh Board</h2>
+</div>
+<hr />
+<form class="form-group" method="POST">
+    <div class="card-title mb-4">
+        <div class="d-flex justify-content-start">
+            <div class="image-container">
+                <img id="imgProfile" style="width: 150px; height: 150px" class="img-thumbnail" data-src="~/image/150x150.png" />
+                <div class="middle">
+                    <input type="button" class="btn btn-secondary" id="btnChangePicture" value="Change" />
+                    <input type="file" style="display: none;" id="profilePicture" name="file" />
+                </div>
+            </div>
+            <div class="userData ml-3">
+                <h2 class="d-block" style="font-size: 1.5rem; font-weight: bold"><a href="javascript:void(0);">@data</a></h2>
+                <h6 class="d-block ml-auto"><input type="button" class="btn btn-primary d-none" id="btnDiscard" value="Discard Changes" /></h6>
+            </div>
+        </div>
+    </div>
+
+    <div>
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">Full Name</label>
+            </div>
+            <div class="col-md-8 col-6">
+                @data
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">Birth Date :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <label id="txtDOB" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">EmailId :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <label id="txtEmailId" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">Phone No :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <label id="txtPhoneNo" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">Address :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <label id="txtAddress" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">Father Name :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <label id="txtFatherName" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">Category :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <label id="txtCat" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;"> Blood Group :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <label id="txtBG" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">Subject :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <label id="txtSubjects" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">Opt Subject :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <label id="txtSubjectsop1" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">ID Proof1 :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <img id="img1" style="width: 150px; height: 150px" class="img-thumbnail" src="~/image/150x150.png" />
+            </div>
+        </div>
+        <hr />
+        <div class="row">
+            <div class="col-sm-3 col-md-2 col-5">
+                <label style="font-weight:bold;">ID Proof2 :</label>
+            </div>
+            <div class="col-md-8 col-6">
+                <img id="img2" style="width: 150px; height: 150px" class="img-thumbnail" src="~/image/150x150.png" />
+            </div>
+        </div>
+        <hr />
+    </div>
+</form>
+
+<script>
+    $(document).ready(function () {
+        $imgSrc = $('#imgProfile').attr('src');
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgProfile').attr('src', e.target.result);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+        $('#btnChangePicture').on('click', function () {
+            if (!$('#btnChangePicture').hasClass('changing')) {
+                $('#profilePicture').click();
+            }
+            else {
+
+            var userid = '@Request.RequestContext.HttpContext.Session["StudentId"]';
+            var FirstName = '@Request.RequestContext.HttpContext.Session["FirstName"]';
+            var LastName = '@Request.RequestContext.HttpContext.Session["LastName"]';
+            var EdituserId = {
+                "StudentId": userid,
+                "FirstName": FirstName,
+                "LastName": LastName,
+                "ProfilePic": imgProfile.src.replace(/^data:(.*;base64,)?/, '')
+            };
+            $.ajax({
+                url: '/api/Student/ProfilePicUpdate',
+                type: 'POST',
+                dataType: 'json',
+                data: EdituserId,
+                success: function (r, textStatus, xhr) {
+                    if (r.Status == '1') {
+                        $('#btnChangePicture').removeClass('changing');
+                        $('#btnChangePicture').attr('value', 'Change');
+                        $('#btnDiscard').addClass('d-none');
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    console.log('Error in Operation');
+                }
+            });
+            }
+        });
+        $('#profilePicture').on('change', function () {
+            readURL(this);
+            $('#btnChangePicture').addClass('changing');
+            $('#btnChangePicture').attr('value', 'Confirm');
+            $('#btnDiscard').removeClass('d-none');
+        });
+        $('#btnDiscard').on('click', function () {
+            $('#btnChangePicture').removeClass('changing');
+            $('#btnChangePicture').attr('value', 'Change');
+            $('#btnDiscard').addClass('d-none');
+            imgProfile.src = $("#imgProfile").data("src");
+            $('#profilePicture').val('');
+        });
+
+
+
+
+    @*var userid = '@Request.RequestContext.HttpContext.Session["StudentId"]';
+    var Name = $('#txtName').val();
+    var LastName = $('#txtLastName').val();
+    var EdituserId = {
+        "StudentId": userid,
+        "FirstName": FirstName,
+        "LastName": LastName,
+    };
+    $.ajax({
+        url: '/api/Student/ProfilePicUpdate',
+        type: 'POST',
+        dataType: 'json',
+        data: EdituserId,
+        success: function (r, textStatus, xhr) {
+            if (r.Status == '1') { 
+             }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log('Error in Operation');
+        }
+    });*@
+
+
+
+
+
+    });
+</script>
+<script>
+    var userid = '@Request.RequestContext.HttpContext.Session["StudentId"]';
+    var imgProfile1 = '';
+    var EdituserId = {
+        "StudentId": userid
+    };
+    //imgProfile data - src
+    $.ajax({
+        url: '/api/Student/EditUserbyId',
+        type: 'POST',
+        dataType: 'json',
+        data: EdituserId,
+        success: function (r, textStatus, xhr) {
+            if (r.Status == '1') {
+                imgProfile.src = r.result.ProfilePic;
+                $("#imgProfile").data("src",r.result.ProfilePic);
+                //imgProfile = r.result.ProfilePic;
+                $('#txtId').text(r.result.StudentId);
+                $('#txtName').text(r.result.FirstName);
+                $('#txtLastName').text(r.result.LastName);
+                $('#txtDOB').text(r.result.DOB);
+                $('#txtEmailId').text(r.result.EmailId);
+                $('#txtPhoneNo').text(r.result.PhoneNo);
+                $('#txtAddress').text(r.result.Address);
+                $('#txtFatherName').text(r.result.FatherName);
+                $('#txtCat').text(r.result.category);
+                $('#txtBG').text(r.result.BloodGroup);
+                $('#txtSubjects').text(r.result.MainSubject);
+                $('#txtSubjectsop1').text(r.result.Obtional1 + ' ' + r.result.Obtional2 + ' ' + r.result.Obtional3 + ' ' + r.result.Obtional4);
+                img1.src = r.result.Document1; 
+                img2.src = r.result.Document2; 
+             }
+        },
+        error: function (xhr, textStatus, errorThrown) {
+            console.log('Error in Operation');
+        }
+    });
+</script>
+

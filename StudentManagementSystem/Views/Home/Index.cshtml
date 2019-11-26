@@ -1,0 +1,70 @@
+﻿@{
+    ViewBag.Title = "AdminDeshBoard";
+    Layout = "~/Views/Shared/_LayoutIndex.cshtml";
+}
+@model StudentManagementSystem.Models.LoginCheckVM
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
+
+<title>Login Page</title>
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<link href="~/css/MyStyle.css" rel="stylesheet" />
+
+<div class="container">
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="d-flex justify-content-center h-100">
+        <div class="card">
+            <div class="card-header">
+                <h3>Sign In</h3>
+                <div class="d-flex justify-content-end social_icon">
+                    <span><i class="fab fa-facebook-square"></i></span>
+                    <span><i class="fab fa-google-plus-square"></i></span>
+                    <span><i class="fab fa-twitter-square"></i></span>
+                </div>
+            </div>
+            <div class="card-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-user"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.EmailId, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter EmailId" } })
+                        @Html.ValidationMessageFor(model => model.EmailId, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="input-group form-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-key"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Password" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                    </div>
+                    <div class="row align-items-center remember">
+                        <input type="checkbox">Remember Me
+                    </div>
+                    <div class="form-group">
+                        <input type="button" id="btnRegistration" class="btn float-right m-1 login_btn" value="Registration">
+                        <input type="submit" id="btnSubmit" value="sign In" class="btn float-right m-1 login_btn">
+                    </div>
+                }
+            </div>
+            <div class="card-footer">
+                <div class="d-flex justify-content-center links">
+                    Don't have Registration?@Html.ActionLink("Sign Up Here!", "StudentRegistration", "Home", new { area = "" }, null)
+                </div>
+            </div>
+            <p style="text-align:center;">&copy; 2015-@DateTime.Now.Year By Developer </p>
+        </div>
+
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script type="text/javascript">
+    $('#btnRegistration').click(function () {
+        window.location.href = '/Home/StudentRegistration';
+    });
+</script>

@@ -1,0 +1,657 @@
+﻿@{
+    ViewBag.Title = "AdminDeshBoard";
+    Layout = "~/Views/Shared/_LayoutStudent.cshtml";
+}
+
+<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+
+
+<div class="col-md-12" style="text-align:center;">
+    <h2>Admin Deshboard</h2>
+    <hr />
+</div>
+
+<form class="form-group row" method="POST">
+    <div class="col-md-10">
+        <table id="UsersList" class="table table-striped table-bordered table-responsive" style="font-size:17px;text-align: left; margin: 0auto;" width="100%" cellspacing="0">
+            <thead>
+                <tr style="background: #5950b3;color: #f9fdfc;">
+                    <th>StudentId</th>
+                    <th style="width:14%">FirstName</th>
+                    <th style="width:14%">LastName</th>
+                    <th style="width:14%">EmailId</th>
+                    <th style="width:14%">PhoneNo</th>
+                    <th style="width:14%">ImgProfile</th>
+                    <th style="width:14%">ACTION</th>
+                </tr>
+            </thead>
+        </table>
+    </div>
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable " style="font-size: 14px;">
+            <div class="modal-content" style="margin-bottom:0px;">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h6 class="modal-title">Edit User Detail</h6>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
+                </div>
+                <!-- Modal body -->
+                <div class="modal-body">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-1">
+                            </div>
+                            <div class="col-md-10">
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>First Name :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="hidden" id="txtId" />
+                                        <input type="text" id="txtName" class="form-control" style="float: left;" name="txtName" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Last Name :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="txtLastName" class="form-control" style="float: left;" name="txtLastName" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Password :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="password" id="txtPassword" class="form-control" style="float: left;" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Retype Password :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="txtRePassword" class="form-control" style="float: left;" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>DOB :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="date" id="txtDOB" class="form-control" name="txtDOB" style="float: left;" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>EmailId :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <div class="col-md-12" style="float: left;margin-left: -15px;" >
+                                            <input type="text" id="txtEmailId" class="form-control  col-md-12" name="txtEmailId" style="float: left;" disabled/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Phone No :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="txtPhoneNo" class="form-control allownumericwithoutdecimal" name="txtPhoneNo" style="float: left;" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Address :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="txtAddress" class="form-control" name="txtAddress" style="float: left;" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Profile Pic :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="file" id="ProfilePic" style="float: left;" class="form-control col-md-8" onchange="ProfilePicClick(event)" />
+                                        <img id="ImgProfile" class="ProPic col-md-4" width="40" height="40" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Father Name :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="text" id="txtFatherName" class="form-control" style="float: left;" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Category :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="radio" name="group1" id="r1" value="GENERAL" /> GENERAL &nbsp;
+                                        <input type="radio" name="group1" id="r2" value="SC" /> SC<br />
+                                        <input type="radio" name="group1" id="r3" value="ST" /> ST
+                                        <input type="radio" id="r4" style="margin-left: 52px;" name="group1" value="OBC" /> OBC<br /><p class="radiButtons"></p>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Blood Group :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select id="ddlBloodGroup" name="ddlBloodGroup" class="form-control" style="float: left;">
+                                            <option id="BloodGroup" value=" ">--Select Blood Group--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Subject :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <select id="ddlSubject" name="ddlSubject" class="form-control" style="float: left;">
+                                            <option id="Subject" value=" ">--Select Subject--</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Optional Subjects :</label>
+                                    </div>
+                                    <div class="col-md-8" style="float: left;">
+                                        <p id="checkBoxes">
+                                            <input type="checkbox" id="cb1" value="1" />
+                                            <label for="Checkbox1">Hindi</label>
+                                            <br />
+                                            <input type="checkbox" id="cb2" value="2" />
+                                            <label for="Checkbox2">English</label>
+                                            <br />
+                                            <input type="checkbox" id="cb3" value="3" />
+                                            <label for="Checkbox3">Maths</label>
+                                            <br />
+                                            <input type="checkbox" id="cb4" value="4" />
+                                            <label for="Checkbox4">Physics</label>
+                                            <br />
+                                        </p><p class="checkboxs" />
+                                        <p id="status" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Upload Documents1 :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="file" id="UploadDocuments1" style="float: left;" class="form-control col-md-8" onchange="UploadDocumentsClick(event)" />
+                                        <img id="Img1" class="Img1 col-md-4" width="50" height="50" />
+                                    </div>
+                                </div>
+                                <div class="row" style="margin: 3px;">
+                                    <div class="col-md-4">
+                                        <label>Upload Documents2 :</label>
+                                    </div>
+                                    <div class="col-md-8">
+                                        <input type="file" id="UploadDocuments2" style="float: left;" class="form-control col-md-8" onchange="UploadDocumentsClick2(event)" />
+                                        <img id="Img2" class="Img2 col-md-4" width="40" height="40" />
+                                    </div>
+                                </div>
+                                <div class="col-md-8" style="margin: 3px;">
+                                    <input type="button" style="float:left" id="btnSubmit" class="btn btn-success" value="Update">
+                                </div>
+                            </div>
+                            <div class="col-md-1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+<span id="massage" .error></span>
+<span id="massage" style="color:red;"></span>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+<script>
+
+    $(".allownumericwithoutdecimal").on("keypress keyup blur", function (event) {
+        $(this).val($(this).val().replace(/[^\d].+/, ""));
+        if ((event.which < 48 || event.which > 57 || $(this).val().length >= 15)) {
+            event.preventDefault();
+        }
+    });
+    var ProfilePicClick = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('ProfilePic');
+            output.src = reader.result;
+            ImgProfile.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+    var UploadDocumentsClick = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('UploadDocuments1');
+            output.src = reader.result;
+            Img1.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+    var UploadDocumentsClick2 = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('UploadDocuments2');
+            output.src = reader.result;
+            Img2.src = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+    var cat = ''; var optionalSubject = '';
+    $(document).ready(function () {
+        var rGrp = $("input[name=group1]");
+        rGrp.click(function () {
+            var checkedRadio = rGrp.filter(":checked");
+            //$("#status").text(checkedRadio.val());
+            cat = checkedRadio.val();
+        });
+        var cb = $("#checkBoxes input[type='checkbox']");
+        cb.on('click', function () {
+            var selected = [];
+            cb.each(function () {
+                if (this.checked) {
+                    selected.push($(this).next().text());
+                }
+            });
+            //$("#status").text(selected.join(','));
+            optionalSubject = selected.join(',');
+        });
+        var ddlBloodGroup = $('#ddlBloodGroup');
+        $.ajax({
+            url: '/api/Student/BloodGroupList',
+            type: 'GET',
+            dataType: 'json',
+            success: function (d) {
+                $.each(d, function (i, BloodGroup) {
+                    ddlBloodGroup.append($("<option></option>").val(BloodGroup.BloodGroupId).html(BloodGroup.BloodGroupName));
+                });
+            },
+            error: function () { }
+        });
+        var ddlSubject = $('#ddlSubject');
+        $.ajax({
+            url: '/api/Student/SubjectList',
+            type: 'GET',
+            dataType: 'json',
+            success: function (d) {
+                $.each(d, function (i, Subject) {
+                    ddlSubject.append($("<option></option>").val(Subject.SubjectId).html(Subject.SubjectName)); //--Select Subject--
+                });
+            },
+            error: function () { }
+        });
+
+        $('#btnSubmit').click(function () {
+            //var emailRegex = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+            var Name = $('#txtName').val();
+            var LastName = $('#txtLastName').val();
+            var Password = $('#txtPassword').val();
+            var RePassword = $('#txtRePassword').val();
+            var DOB = $('#txtDOB').val()
+            var PhoneNo = $('#txtPhoneNo').val();
+            var Address = $('#txtAddress').val();
+            var FatherName = $('#txtFatherName').val();
+            var BloodGroup = $("#ddlBloodGroup :selected").text();
+            var BloodGroupId = $("#ddlBloodGroup :selected").val();
+            var Subject = $("#ddlSubject :selected").text();
+            var SubjectId = $("#ddlSubject :selected").val();
+            var Optional1 = ''; var Optional2 = ''; var Optional3 = ''; var Optional4 = '';
+            var UserId1 = $('#txtId').val();
+
+            $("#checkBoxes input[type='checkbox']").each(function () {
+                if (this.checked) {
+                    var selected = [];
+                    cb.each(function () {
+                        if (this.checked) {
+                            selected.push($(this).next().text());
+                        }
+                    });
+                    optionalSubject = selected.join(',');
+                }
+            });
+            if (optionalSubject.indexOf('Hindi') !== -1) {
+                Optional1 = 'Hindi';
+            }
+            if (optionalSubject.indexOf('English') !== -1) {
+                Optional2 = 'English';
+            }
+            if (optionalSubject.indexOf('Maths') !== -1) {
+                Optional3 = 'Maths';
+            }
+            if (optionalSubject.indexOf('Physics') !== -1) {
+                Optional4 = 'Physics';
+            }
+            cat = $("input[name=group1]").is(":checked");
+            $(".error-div").remove();
+            if (Name == '') {
+                $("#txtName").focus();
+                $("#txtName").after('<span class="error-div" style="color: #ff0202;">&nbsp*Please Enter Name!</span>');
+                return false;
+            } else if (LastName == '') {
+                $("#txtLastName").focus();
+                $("#txtLastName").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter Last Name!</span>');
+                return false;
+            } else if (Password == '') {
+                $("#txtPassword").focus();
+                $("#txtPassword").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Enter Password!</span>');
+                return false;
+            } else if (RePassword == '') {
+                $("#txtRePassword").focus();
+                $("#txtRePassword").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter RePassword!</span>');
+                return false;
+            } else if (!RePassword.match(Password)) {
+                $("#txtPassword").focus();
+                $("#txtPassword").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Password do not match!</span>');
+                return false;
+            } else if (!passwordRegex.test(Password)) {
+                $("#txtPassword").focus();
+                $("#txtPassword").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Enter the valid Password!</span>');
+                return false;
+            }
+            else if (DOB == '') {
+                $("#txtDOB").focus();
+                $("#txtDOB").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter the DOB!</span>');
+                return false;
+            }
+            else if (PhoneNo == '') {
+                $("#txtPhoneNo").focus();
+                $("#txtPhoneNo").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter the PhoneNumber!</span>');
+                return false;
+            }
+            else if (Address == '') {
+                $("#txtAddress").focus();
+                $("#txtAddress").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Enter the Address!</span>');
+                return false;
+            }
+            else if (ImgProfile.src.trim() == '') {
+                $(".ProPic").focus();
+                $(".ProPic").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Select Profile Pic!</span>');
+                return false;
+            }
+            else if (FatherName == '') {
+                $("#txtFatherName").focus();
+                $("#txtFatherName").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please enter Father Name!</span>');
+                return false;
+            }
+            else if (cat == '') {
+                $(".radiButtons").focus();
+                $(".radiButtons").after('<span class="error-div" style="color: #ff0202;">*Please Select Category!</span>');
+                return false;
+            }
+            else if (BloodGroup == '--Select Blood Group--' || BloodGroup.trim() == '') {
+                $("#ddlBloodGroup").focus();
+                $("#ddlBloodGroup").after('<span class="error-div" style="color: #ff0202;">*Please Select Blood Group!</span>');
+                return false;
+            }
+            else if (Subject == '--Select Subject--' || Subject.trim() == '') {
+                $("#ddlSubject").focus();
+                $("#ddlSubject").after('<span class="error-div" style="color: #ff0202;">*Please Select Subject!</span>');
+                return false;
+            }
+            else if (Img1.src.trim() == '') {
+                $(".Img1").focus();
+                $(".Img1").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Upload Documents1!</span>');
+                return false;
+            }
+            else if (Img2.src.trim() == '') {
+                $(".Img2").focus();
+                $(".Img2").after('<span class="error-div" style="color: #ff0202;"> &nbsp*Please Upload Documents2!</span>');
+                return false;
+            }
+            var ProfilePic2 = '';
+            if ($('#ProfilePic').val() == '')
+            {
+                ProfilePic2 = '';
+            } else
+            {
+                ProfilePic2 = ImgProfile.src.replace(/^data:(.*;base64,)?/, '');
+            }
+            var img3 = '';
+            if ($('#UploadDocuments1').val() == '') {
+                img3 = '';
+            } else {
+                img3 = Img1.src.replace(/^data:(.*;base64,)?/, '');
+            }
+            var img4 = '';
+            if ($('#UploadDocuments2').val() == '') {
+                img4 = '';
+            } else {
+                img4 = Img2.src.replace(/^data:(.*;base64,)?/, '');
+            }
+
+            var UserData = {
+                "StudentId": UserId1,
+                "FirstName": Name,
+                "LastName": LastName,
+                "Password": Password,
+                "DOB": DOB,
+                "PhoneNo": PhoneNo,
+                "Address": Address,
+                "ProfilePic": ProfilePic2,
+                "FatherName": FatherName,
+                "BloodGroup": BloodGroup,
+                "category": $("input[name=group1]").filter(":checked").val(),
+                "MainSubject": Subject,
+                "Obtional1": Optional1,
+                "Obtional2": Optional2,
+                "Obtional3": Optional3,
+                "Obtional4": Optional4,
+                "Document1": img3,
+                "Document2": img4, 
+                "SubjectId": SubjectId, 
+                "BloodGroupId": BloodGroupId, 
+
+            };
+            optionalSubject = '';
+            $.ajax({
+                url: '/api/Student/UpdateUserDetail',
+                type: 'POST',
+                dataType: 'json',
+                data: UserData,
+                success: function (result, textStatus, xhr) {
+                    if (result.Status == '1') {
+                       // $("#btnSubmit").attr("data-dismiss", "myModal");
+                        $("#myModal").modal("hide");
+                        $('#myModal').on('hidden.bs.modal', function (e) {
+                            $(this)
+                                .find("select").val('').end()
+                                .find("input[type=file]").val(null).end()
+                                .find("input[type=checkbox], input[type=radio]").prop("checked", "").end();
+                        })
+                        //Refresh();
+                        window.location.href = "/Home/AdminDeshBoard";
+                    }
+                    if (result.Status == '0') {
+                        $("#massage").text(result.Message);
+                    }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                }
+            });
+        });
+        $('#myModal').on('hidden.bs.modal', function (e) {
+            $(this)
+                .find("select").val('').end()
+                .find("input[type=file]").val(null).end()
+                .find("input[type=checkbox], input[type=radio]").prop("checked", "").end();
+        })
+    });
+</script>
+<script>
+    function EditUserbyId(StudentId) {
+
+        var EdituserId = {
+            "StudentId": StudentId
+        };
+        function formatDate(date) {
+            var d = new Date(date),
+                month = '' + (d.getMonth() + 1),
+                day = '' + d.getDate(),
+                year = d.getFullYear();
+
+            if (month.length < 2) month = '0' + month;
+            if (day.length < 2) day = '0' + day;
+
+            return [year, month, day].join('-');
+        }
+        var time;
+        $.ajax({
+            url: '/api/Student/EditUserbyId',
+            type: 'POST',
+            dataType: 'json',
+            data: EdituserId,
+            success: function (r, textStatus, xhr) {
+                console.log(r)
+                if (r.Status == '1') {
+                    $('#txtId').val(r.result.StudentId);
+                    $('#txtName').val(r.result.FirstName);
+                    $('#txtLastName').val(r.result.LastName);
+                    $('#txtDOB').val(formatDate(r.result.DOB));
+                    $('#txtPassword').val(r.result.Password);
+                    $('#txtRePassword').val(r.result.Password);
+                    $('#txtEmailId').val(r.result.EmailId);
+                    $('#txtPhoneNo').val(r.result.PhoneNo);
+                    $('#txtAddress').val(r.result.Address);
+                    ImgProfile.src=r.result.ProfilePic;
+                    $('#txtFatherName').val(r.result.FatherName);
+                    Img1.src=r.result.Document1;
+                    Img2.src = r.result.Document2;
+                    if (r.result.Obtional1 == 'Hindi')
+                    {
+                        $("#cb1").prop('checked', true);
+                    }
+                    if (r.result.Obtional2 == 'English')
+                    {
+                        $("#cb2").prop('checked', true);
+                    }
+                    if (r.result.Obtional3 == 'Maths')
+                    {
+                        $("#cb3").prop('checked', true);
+                    }
+                    if (r.result.Obtional4 == 'Physics')
+                    {
+                        $("#cb4").prop('checked', true);
+                    }
+                    $('#ddlBloodGroup option')[r.result.BloodGroupId].selected = true;
+                    $('#ddlSubject option')[r.result.SubjectId].selected = true;
+                    if (r.result.category == 'GENERAL') { $("#r1").prop('checked', true); }
+                    if (r.result.category == 'SC') { $("#r2").prop('checked', true); }
+                    if (r.result.category == 'ST') { $("#r3").prop('checked', true);}
+                    if (r.result.category == 'OBC') { $("#r4").prop('checked', true);}
+                }
+                else {
+                    $("#massageotp").text(r.Message);
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('Error in Operation');
+            }
+        });
+    }
+
+    function DeleteUserbyId(StudentId) {
+        var userId = {
+            "StudentId": StudentId,
+        };
+        $.ajax({
+            url: '/api/Student/DeleteUserbyId',
+            data: userId,
+            method: 'post',
+            dataType: 'json',
+            success: function (data, textStatus, xhr) {
+                if (data.Status == 1) {
+                    toastr.success(data.Message);
+                    Refresh();
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                toastr.success(data.Message);
+                Refresh();
+            }
+        });
+    }
+    function Refresh()
+    {
+            var table;
+            var userid = '@Request.RequestContext.HttpContext.Session["StudentId"]';
+            var userId = {
+                "userid": userid,
+            };
+            var table = $('#UsersList').DataTable();
+            $('#container').css('display', 'block');
+            table.columns.adjust().draw();
+            ///api/Student/GetAllStudents
+            $.ajax({
+                url: '/api/Student/GetAllStudents',
+                data: '',
+                method: 'post',
+                dataType: 'json',
+                success: function (data)
+                {
+                    table = $('#UsersList').dataTable({
+                        processing: true,
+                        paging: true,
+                        sort: true,
+                        searching: true,
+                        data: data,
+                        bDestroy: true,
+                        columns: [
+                            { "data": "StudentId", "autoWidth": false, "visible": false },
+                            { "data": "Name", "autoWidth": false },
+                            { "data": "LastName", "autoWidth": false },
+                            { "data": "EmailId", "autoWidth": false },
+                            { "data": "PhoneNo", "autoWidth": false },
+                            {
+                                "data": "ImgProfile", "autoWidth": false, "render": function (data) {
+                                    var ImgProfile;
+                                    if (data != 'NA' && data != undefined) {
+                                        ImgProfile = data;
+                                    }
+                                    else {
+                                        ImgProfile = "";
+                                    }
+
+                                    return '<img class=".img-fluid .img-responsive .img-rounded" src="' + ImgProfile + '" style="height:44px;width:57px;"/>';
+                                }
+                            },
+
+                            {
+                                data: null, render: function (data, type, row) {
+                                    return '<i class="fa fa-eye"style="font-size:28px;color:green;"data-toggle="modal"data-target="#myModal"onclick=EditUserbyId("' + row.StudentId + '");></i>&nbsp<i class="fa fa-trash"style="font-size:28px;color:red;"onclick=DeleteUserbyId("'+row.StudentId+'");></i>';
+                                }
+                            },
+                        ]
+                    });
+
+                }
+            });
+    }
+    $(document).ready(function () {
+        $(function () {
+            Refresh();
+        });
+    });
+</script>

@@ -1,0 +1,21 @@
+﻿@if (!string.IsNullOrEmpty(Convert.ToString(Session["StudentId"])))
+{
+    using (Html.BeginForm("Logout", "Home", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right" style="float:right;">
+            <li>
+                @Html.ActionLink("Hello " + Session["EmailId"] + "!", "Index", "Home", routeValues: new { area = "" }, htmlAttributes: new { title = "Manage", @class = "navbar-brand" })
+            </li>
+            <li><a href="javascript:sessionStorage.removeItem('StudentId');$('#logoutForm').submit();" class="navbar-brand">Log off</a></li>
+        </ul>
+    }
+}
+else
+{
+    <ul class="nav navbar-nav navbar-right" style="float:right;">
+        <li>@Html.ActionLink("Register", "StudentRegistration", "Home", routeValues: new { area = "" }, htmlAttributes: new { id = "registerLink", @class = "navbar-brand" })</li>
+        <li>@Html.ActionLink("Log in", "Index", "Home", routeValues: new { area = "" }, htmlAttributes: new { id = "loginLink",@class = "navbar-brand" })</li>
+    </ul>
+}

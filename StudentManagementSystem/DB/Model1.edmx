@@ -1,0 +1,449 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="StudentsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="BloodGroup">
+          <Key>
+            <PropertyRef Name="BloodGroupId" />
+          </Key>
+          <Property Name="BloodGroupId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BloodGroupName" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="DOB" Type="date" />
+          <Property Name="EmailId" Type="varchar" MaxLength="50" />
+          <Property Name="PhoneNo" Type="varchar" MaxLength="15" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="10" />
+          <Property Name="BloodGroupId" Type="int" />
+          <Property Name="ProfilePic" Type="varchar" MaxLength="200" />
+          <Property Name="FatherName" Type="varchar" MaxLength="50" />
+          <Property Name="category" Type="varchar" MaxLength="50" />
+          <Property Name="MainSubject" Type="varchar" MaxLength="30" />
+          <Property Name="SubjectId" Type="int" />
+          <Property Name="Document1" Type="varchar" MaxLength="200" />
+          <Property Name="Document2" Type="varchar" MaxLength="200" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Obtional1" Type="varchar" MaxLength="10" />
+          <Property Name="Obtional2" Type="varchar" MaxLength="10" />
+          <Property Name="Obtional3" Type="varchar" MaxLength="10" />
+          <Property Name="Obtional4" Type="varchar" MaxLength="10" />
+          <Property Name="Role" Type="varchar" MaxLength="10" />
+          <Property Name="isDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <Function Name="BloodGroupList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="DeletebyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertStudent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="DOB" Type="date" Mode="In" />
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="PhoneNo" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="BloodGroup" Type="varchar" Mode="In" />
+          <Parameter Name="ProfilePic" Type="varchar" Mode="In" />
+          <Parameter Name="FatherName" Type="varchar" Mode="In" />
+          <Parameter Name="category" Type="varchar" Mode="In" />
+          <Parameter Name="MainSubject" Type="varchar" Mode="In" />
+          <Parameter Name="Document1" Type="varchar" Mode="In" />
+          <Parameter Name="Document2" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Obtional1" Type="varchar" Mode="In" />
+          <Parameter Name="Obtional2" Type="varchar" Mode="In" />
+          <Parameter Name="Obtional3" Type="varchar" Mode="In" />
+          <Parameter Name="Obtional4" Type="varchar" Mode="In" />
+          <Parameter Name="Role" Type="varchar" Mode="In" />
+          <Parameter Name="SubjectId" Type="int" Mode="In" />
+          <Parameter Name="BloodGroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LoginCheck" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="MailVarify" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmailId" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="ProfilePicUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentId" Type="int" Mode="In" />
+          <Parameter Name="ProfilePic" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="StudentDelete" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="StudentRecord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="StudentUpdate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentId" Type="int" Mode="In" />
+          <Parameter Name="FirstName" Type="varchar" Mode="In" />
+          <Parameter Name="LastName" Type="varchar" Mode="In" />
+          <Parameter Name="DOB" Type="date" Mode="In" />
+          <Parameter Name="PhoneNo" Type="varchar" Mode="In" />
+          <Parameter Name="Address" Type="varchar" Mode="In" />
+          <Parameter Name="BloodGroup" Type="varchar" Mode="In" />
+          <Parameter Name="ProfilePic" Type="varchar" Mode="In" />
+          <Parameter Name="FatherName" Type="varchar" Mode="In" />
+          <Parameter Name="category" Type="varchar" Mode="In" />
+          <Parameter Name="MainSubject" Type="varchar" Mode="In" />
+          <Parameter Name="Document1" Type="varchar" Mode="In" />
+          <Parameter Name="Document2" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="Obtional1" Type="varchar" Mode="In" />
+          <Parameter Name="Obtional2" Type="varchar" Mode="In" />
+          <Parameter Name="Obtional3" Type="varchar" Mode="In" />
+          <Parameter Name="Obtional4" Type="varchar" Mode="In" />
+          <Parameter Name="Role" Type="varchar" Mode="In" />
+          <Parameter Name="isDeleted" Type="bit" Mode="In" />
+          <Parameter Name="SubjectId" Type="int" Mode="In" />
+          <Parameter Name="BloodGroupId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SubjectList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="UserDetailbyId" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="StudentId" Type="int" Mode="In" />
+        </Function>
+        <EntityContainer Name="StudentsModelStoreContainer">
+          <EntitySet Name="BloodGroup" EntityType="Self.BloodGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Student" EntityType="Self.Student" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Subject" EntityType="Self.Subject" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudentsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="BloodGroup">
+          <Key>
+            <PropertyRef Name="BloodGroupId" />
+          </Key>
+          <Property Name="BloodGroupId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BloodGroupName" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DOB" Type="DateTime" Precision="0" />
+          <Property Name="EmailId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="PhoneNo" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Address" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="BloodGroup" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="BloodGroupId" Type="Int32" />
+          <Property Name="ProfilePic" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="MainSubject" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="SubjectId" Type="Int32" />
+          <Property Name="Document1" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Document2" Type="String" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Obtional1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Obtional2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Obtional3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Obtional4" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="isDeleted" Type="Boolean" />
+        </EntityType>
+        <EntityType Name="Subject">
+          <Key>
+            <PropertyRef Name="SubjectId" />
+          </Key>
+          <Property Name="SubjectId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityContainer Name="StudentsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="BloodGroups" EntityType="Self.BloodGroup" />
+          <EntitySet Name="Students" EntityType="Self.Student" />
+          <EntitySet Name="Subjects" EntityType="Self.Subject" />
+          <FunctionImport Name="BloodGroupList" ReturnType="Collection(StudentsModel.BloodGroupList_Result)" />
+          <FunctionImport Name="DeletebyId">
+          <Parameter Name="StudentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertStudent">
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="DOB" Mode="In" Type="DateTime" />
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="PhoneNo" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="BloodGroup" Mode="In" Type="String" />
+            <Parameter Name="ProfilePic" Mode="In" Type="String" />
+            <Parameter Name="FatherName" Mode="In" Type="String" />
+            <Parameter Name="category" Mode="In" Type="String" />
+            <Parameter Name="MainSubject" Mode="In" Type="String" />
+            <Parameter Name="Document1" Mode="In" Type="String" />
+            <Parameter Name="Document2" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Obtional1" Mode="In" Type="String" />
+            <Parameter Name="Obtional2" Mode="In" Type="String" />
+            <Parameter Name="Obtional3" Mode="In" Type="String" />
+            <Parameter Name="Obtional4" Mode="In" Type="String" />
+            <Parameter Name="Role" Mode="In" Type="String" />
+            <Parameter Name="SubjectId" Mode="In" Type="Int32" />
+            <Parameter Name="BloodGroupId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LoginCheck" ReturnType="Collection(StudentsModel.LoginCheck_Result)">
+            <Parameter Name="EmailId" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="MailVarify" ReturnType="Collection(String)">
+          <Parameter Name="EmailId" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="ProfilePicUpdate">
+            <Parameter Name="StudentId" Mode="In" Type="Int32" />
+            <Parameter Name="ProfilePic" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="StudentDelete">
+          <Parameter Name="StudentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="StudentRecord" ReturnType="Collection(StudentsModel.StudentRecord_Result)" />
+          <FunctionImport Name="StudentUpdate">
+            <Parameter Name="StudentId" Mode="In" Type="Int32" />
+            <Parameter Name="FirstName" Mode="In" Type="String" />
+            <Parameter Name="LastName" Mode="In" Type="String" />
+            <Parameter Name="DOB" Mode="In" Type="DateTime" />
+            <Parameter Name="PhoneNo" Mode="In" Type="String" />
+            <Parameter Name="Address" Mode="In" Type="String" />
+            <Parameter Name="BloodGroup" Mode="In" Type="String" />
+            <Parameter Name="ProfilePic" Mode="In" Type="String" />
+            <Parameter Name="FatherName" Mode="In" Type="String" />
+            <Parameter Name="category" Mode="In" Type="String" />
+            <Parameter Name="MainSubject" Mode="In" Type="String" />
+            <Parameter Name="Document1" Mode="In" Type="String" />
+            <Parameter Name="Document2" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="Obtional1" Mode="In" Type="String" />
+            <Parameter Name="Obtional2" Mode="In" Type="String" />
+            <Parameter Name="Obtional3" Mode="In" Type="String" />
+            <Parameter Name="Obtional4" Mode="In" Type="String" />
+            <Parameter Name="Role" Mode="In" Type="String" />
+            <Parameter Name="isDeleted" Mode="In" Type="Boolean" />
+            <Parameter Name="SubjectId" Mode="In" Type="Int32" />
+            <Parameter Name="BloodGroupId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SubjectList" ReturnType="Collection(StudentsModel.SubjectList_Result)" />
+          <FunctionImport Name="UserDetailbyId" EntitySet="Students" ReturnType="Collection(StudentsModel.Student)">
+          <Parameter Name="StudentId" Mode="In" Type="Int32" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="BloodGroupList_Result">
+          <Property Type="Int32" Name="BloodGroupId" Nullable="false" />
+          <Property Type="String" Name="BloodGroupName" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="LoginCheck_Result">
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="EmailId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Role" Nullable="true" MaxLength="10" />
+        </ComplexType>
+        <ComplexType Name="StudentRecord_Result">
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DOB" Nullable="true" />
+          <Property Type="String" Name="EmailId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="BloodGroup" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="BloodGroupId" Nullable="true" />
+          <Property Type="String" Name="ProfilePic" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="FatherName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="category" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MainSubject" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="SubjectId" Nullable="true" />
+          <Property Type="String" Name="Document1" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Document2" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Obtional1" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Obtional2" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Obtional3" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Obtional4" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Role" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="isDeleted" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="SubjectList_Result">
+          <Property Type="Int32" Name="SubjectId" Nullable="false" />
+          <Property Type="String" Name="SubjectName" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="UserDetailbyId_Result">
+          <Property Type="Int32" Name="StudentId" Nullable="false" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="DOB" Nullable="true" />
+          <Property Type="String" Name="EmailId" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PhoneNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Address" Nullable="true" MaxLength="200" />
+          <Property Type="String" Name="BloodGroup" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="BloodGroupId" Nullable="true" />
+          <Property Type="String" Name="ProfilePic" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="FatherName" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="category" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="MainSubject" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="SubjectId" Nullable="true" />
+          <Property Type="String" Name="Document1" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Document2" Nullable="false" MaxLength="200" />
+          <Property Type="String" Name="Password" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Obtional1" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Obtional2" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Obtional3" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Obtional4" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="Role" Nullable="true" MaxLength="10" />
+          <Property Type="Boolean" Name="isDeleted" Nullable="true" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StudentsModelStoreContainer" CdmEntityContainer="StudentsEntities">
+          <EntitySetMapping Name="BloodGroups">
+            <EntityTypeMapping TypeName="StudentsModel.BloodGroup">
+              <MappingFragment StoreEntitySet="BloodGroup">
+                <ScalarProperty Name="BloodGroupId" ColumnName="BloodGroupId" />
+                <ScalarProperty Name="BloodGroupName" ColumnName="BloodGroupName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Students">
+            <EntityTypeMapping TypeName="StudentsModel.Student">
+              <MappingFragment StoreEntitySet="Student">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="BloodGroupId" ColumnName="BloodGroupId" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="MainSubject" ColumnName="MainSubject" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Document1" ColumnName="Document1" />
+                <ScalarProperty Name="Document2" ColumnName="Document2" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Obtional1" ColumnName="Obtional1" />
+                <ScalarProperty Name="Obtional2" ColumnName="Obtional2" />
+                <ScalarProperty Name="Obtional3" ColumnName="Obtional3" />
+                <ScalarProperty Name="Obtional4" ColumnName="Obtional4" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Subjects">
+            <EntityTypeMapping TypeName="StudentsModel.Subject">
+              <MappingFragment StoreEntitySet="Subject">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="BloodGroupList" FunctionName="StudentsModel.Store.BloodGroupList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentsModel.BloodGroupList_Result">
+                <ScalarProperty Name="BloodGroupId" ColumnName="BloodGroupId" />
+                <ScalarProperty Name="BloodGroupName" ColumnName="BloodGroupName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="DeletebyId" FunctionName="StudentsModel.Store.DeletebyId" />
+          <FunctionImportMapping FunctionImportName="InsertStudent" FunctionName="StudentsModel.Store.InsertStudent" />
+          <FunctionImportMapping FunctionImportName="LoginCheck" FunctionName="StudentsModel.Store.LoginCheck">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentsModel.LoginCheck_Result">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="MailVarify" FunctionName="StudentsModel.Store.MailVarify" />
+          <FunctionImportMapping FunctionImportName="ProfilePicUpdate" FunctionName="StudentsModel.Store.ProfilePicUpdate" />
+          <FunctionImportMapping FunctionImportName="StudentDelete" FunctionName="StudentsModel.Store.StudentDelete" />
+          <FunctionImportMapping FunctionImportName="StudentRecord" FunctionName="StudentsModel.Store.StudentRecord">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentsModel.StudentRecord_Result">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+                <ScalarProperty Name="BloodGroupId" ColumnName="BloodGroupId" />
+                <ScalarProperty Name="ProfilePic" ColumnName="ProfilePic" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="category" ColumnName="category" />
+                <ScalarProperty Name="MainSubject" ColumnName="MainSubject" />
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="Document1" ColumnName="Document1" />
+                <ScalarProperty Name="Document2" ColumnName="Document2" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Obtional1" ColumnName="Obtional1" />
+                <ScalarProperty Name="Obtional2" ColumnName="Obtional2" />
+                <ScalarProperty Name="Obtional3" ColumnName="Obtional3" />
+                <ScalarProperty Name="Obtional4" ColumnName="Obtional4" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="isDeleted" ColumnName="isDeleted" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="StudentUpdate" FunctionName="StudentsModel.Store.StudentUpdate" />
+          <FunctionImportMapping FunctionImportName="SubjectList" FunctionName="StudentsModel.Store.SubjectList">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="StudentsModel.SubjectList_Result">
+                <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="UserDetailbyId" FunctionName="StudentsModel.Store.UserDetailbyId">
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

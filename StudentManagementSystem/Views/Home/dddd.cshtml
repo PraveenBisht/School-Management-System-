@@ -1,0 +1,783 @@
+﻿@{
+    Layout = "~/Views/Shared/UserDashBoard.cshtml";
+}
+<link href="~/Content/DataTables/css/jquery.dataTables.min.css" rel="stylesheet" />
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script src="~/Scripts/DataTables/jquery.dataTables.min.js"></script>
+<h2>All Users List</h2>
+
+<table id="UsersList" class="table table-striped table-bordered table-responsive " style="font-size: 11px;" width="100%" cellspacing="0">
+    <thead>
+        <tr style="background: #5950b3;color: #f9fdfc;">
+            <th>USER ID</th>
+            <th>NAME</th>
+            <th>EMAIL ID</th>
+            <th>DOB</th>
+            <th>ADDRESS</th>
+            <th>PROFILE PIC</th>
+            <th>ACTION</th>
+        </tr>
+    </thead>
+</table>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-xl modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content" style="margin-top: -300px; margin-bottom:0px;">
+            <!-- Modal Header -->
+            <div class="modal-header">
+                <h6 class="modal-title">Edit User Detail</h6>
+                <button type="button" class="close" data-dismiss="modal" onclick="return :javascript close()">&times;</button>
+            </div>
+            <!-- Modal body -->
+            <div class="modal-body">
+                <div class="container">
+                    <div class="form">
+                        <form class="form-group" method="POST">
+                            <div class="row m-0">
+                                <div class="col-lg-12">
+                                    <h5 class="d-block">Personal Informaion</h5>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="wrapper ">
+                                        <div class="icon">
+                                            <i class="fas fa-user-alt"></i>
+                                        </div>
+                                        <input type="hidden" id="UserId" />
+                                        <input type="text" id="Name" name="Name" placeholder="Name" class="form-control" required />
+                                    </div>
+                                </div>
+                                <div class="col-lg-6">
+                                    <div class="wrapper ">
+
+                                        <!-- Register Input Icon -->
+                                        <div class="icon">
+                                            <i class="fas fa-envelope"></i>
+                                        </div>
+
+                                        <!-- Register Input -->
+                                        @*<input type="email" class="form-control" placeholder="Email" name="email" required>*@
+                                        <input type="email" id="EmailId" name="EmailId" placeholder="Email" class="form-control" required />
+
+                                    </div>
+                                </div>
+                                <!-- Register Input Item -->
+                                <div class="col-lg-6">
+                                    <div class="wrapper ">
+
+                                        <!-- Register Input Icon -->
+                                        <div class="icon">
+                                            <i class="fas fa-mobile-alt"></i>
+                                        </div>
+
+                                        <!-- Register Input -->
+                                        <input type="text" id="PhoneNumber" name="PhoneNumber" class="form-control" maxlength="15" placeholder="Phone Number" required />
+                                    </div>
+                                </div>
+                                <!-- Register Input Item -->
+                                <div class="col-lg-6">
+                                    <div class="wrapper ">
+
+                                        <!-- Register Input Icon -->
+                                        <div class="icon">
+                                            <i class="far fa-calendar-alt"></i>
+                                        </div>
+                                        <input type="date" id="Dob" name="Dob" class="form-control" placeholder="D.O.B." />
+                                    </div>
+                                </div>
+                            </div><!--row-->
+                            <div class="row m-0">
+                                <div class="col-lg-12">
+                                    <h5 class="d-block">Location Informaion</h5>
+                                </div>
+                                <!-- Register Input Item -->
+                                <div class="col-lg-12">
+
+
+                                    <div class="wrapper">
+
+                                        <!-- Register Input Icon -->
+                                        <div class="icon">
+                                            <i class="fas fa-location-arrow"></i>
+                                        </div>
+
+                                        <!-- Register Input -->
+                                        <input id="Address" name="Address" type="text" class="form-control" placeholder="Address" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row m-0">
+                                <div class="col-lg-4">
+                                    <div class="wrapper ">
+                                        <div class="icon">
+                                            <i class="fas fa-thumbtack"></i>
+                                        </div>
+                                        <select id="ddlCountry" title="Please select Country" name="ddlCountry" class="form-control">
+                                            <option id="country" value=" "></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="wrapper ">
+                                        <div class="icon">
+                                            <i class="fas fa-thumbtack"></i>
+                                        </div>
+                                        <select id="ddlState" name="ddlState" title="Please select State" class="form-control">
+                                            <option id="state" value=" "></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4">
+                                    <div class="wrapper">
+                                        <div class="icon">
+                                            <i class="fas fa-thumbtack"></i>
+                                        </div>
+                                        <select id="ddlCity" name="ddlCity" title="Please select City" class="form-control">
+                                            <option id="city" value=" "></option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Register Input Item -->
+                            <div class="row m-0">
+                                <div class="col-lg-12">
+                                    <h5 class="d-block">Bank Detail(optional)</h5>
+                                </div>
+                            </div>
+                            <div class="row m-0" style="padding: 23px;">
+                                <div class="col-lg-12 py-3 ">
+                                    <div class="custom-control custom-radio pl-2 d-inline">
+                                        <input type="radio" class="custom-control-input" id="cheque" name="bank" value="cheque" checked>
+                                        <label class="custom-control-label align-middle pl-5" for="cheque">cancel cheque</label>
+                                    </div>
+                                    <div class="custom-control custom-radio pl-5 d-inline">
+                                        <input type="radio" class="custom-control-input" id="bank" name="bank" value="bank">
+                                        <label class="custom-control-label align-middle pl-5" for="bank">Bank Details</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12 cancelcheque">
+                                    <div class="wrapper ">
+
+                                        <!-- Register Input Icon -->
+                                        <div class="icon">
+                                            <i class="fas fa-lock"></i>
+                                        </div>
+
+                                        <!-- Register Input -->
+                                        <img id="cancelCheque" width="100" height="100" />   @*hidden="hidden"*@
+                                        <input type="file" id="cancelCheque" name="cancelCheque" class="form-control file-input" placeholder="Govt. ID" onchange="CancelCheque(event)" required />
+                                    </div>
+                                </div>
+
+                                <!--cancel-cheque-->
+                                <div class="col-md-12 bankdetail" style="display: none;">
+                                    <div class="row">
+
+                                        <div class="col-lg-6">
+                                            <div class="wrapper ">
+
+                                                <!-- Register Input Icon -->
+                                                <div class="icon">
+                                                    <i class="fas fa-user-alt"></i>
+                                                </div>
+
+                                                <!-- Register Input -->
+                                                <input type="text" id="BankName" class="form-control" placeholder="Bank Name*" name="Name" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="wrapper ">
+
+                                                <!-- Register Input Icon -->
+                                                <div class="icon">
+                                                    <i class="fas fa-user-alt"></i>
+                                                </div>
+
+                                                <!-- Register Input -->
+                                                <input type="text" id="AccountNumber" class="form-control" placeholder="Account Number" name="Name" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+
+                                            <div class="wrapper ">
+
+                                                <!-- Register Input Icon -->
+                                                <div class="icon">
+                                                    <i class="fas fa-user-alt"></i>
+                                                </div>
+
+                                                <!-- Register Input -->
+                                                <input type="text" id="BankIFSCCode" class="form-control" placeholder="Bank IFSC Code" name="Bank IFSC Code" required>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-6">
+                                            <div class="wrapper ">
+
+                                                <!-- Register Input Icon -->
+                                                <div class="icon">
+                                                    <i class="fas fa-user-alt"></i>
+                                                </div>
+
+                                                <!-- Register Input -->
+                                                <input type="text" id="BankBranchName" class="form-control" placeholder="Bank Branch Name" name="Bank Branch Name" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!--cancel-cheque-->
+                            </div><!--row-->
+                            <!--12-->
+                            <!-- Register Input Item -->
+                            <div class="col-lg-12 p-0">
+                                <div class="col-lg-12">
+                                    <h5 class="d-block">Documents</h5>
+                                </div>
+                                <div class="row m-0">
+                                    <div class="col-lg-6">
+                                        <div class="wrapper ">
+
+                                            <!-- Register Input Icon -->
+                                            <div class="icon">
+                                                <i class="fas fa-lock"></i>
+                                            </div>
+                                            <img id="idproof1" width="100" height="100" src="~/img/noimage.svg.png" />
+                                            <input type="file" id="Idproof1" name="Idproof1" class="form-control file-input" placeholder="Govt. ID" onchange="loadFileIDproof1(event)" required />
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        <div class="wrapper ">
+                                            <div class="icon">
+                                                <i class="fas fa-lock"></i>
+                                            </div>
+                                            <img id="idproof2" width="100" height="100" src="~/img/noimage.svg.png" />
+                                            <input type="file" id="Idproof2" name="Idproof2" class="form-control file-input" placeholder="Govt. ID" onchange="loadFileIDproof2(event)" required />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-lg-12">
+                                <input type="button" id="btnupdateuser" class="button btn-three text-uppercase" value="Update">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<span id="massage" .error></span>
+<span id="massage" style="color:red;"></span>
+<style>
+    .error {
+        color: red;
+    }
+</style>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
+<script>
+    function DeleteUserbyId(userId) {
+        var userId = {
+            "userId": userId,
+        };
+        function refreshTable() {
+
+            $.ajax({
+                url: '/api/JoinApi/AllUsers',
+                data: '',
+                method: 'post',
+                dataType: 'json',
+                success: function (data) {
+                    table = $('#UsersList').dataTable({
+                        processing: true,
+                        paging: true,
+                        sort: true,
+                        searching: true,
+                        data: data.result,
+                        bDestroy: true,
+                        columns: [
+                            { "data": "userId", "autoWidth": false, "visible": false },
+                            { "data": "name", "autoWidth": false },
+                            { "data": "emailid", "autoWidth": false },
+                            { "data": "dob", "autoWidth": false },
+                            { "data": "address", "autoWidth": false },
+                            {
+                                "data": "profilepic", "render": function (data) {
+                                    var profilepic;
+                                    if (data != 'NA' && data != undefined) {
+                                        profilepic = data;
+                                    }
+                                    else {
+                                        profilepic = "";
+                                    }
+
+                                    return '<img class=".img-fluid .img-responsive .img-rounded" src="' + profilepic + '" style="height:44px;width:57px;"/>';
+                                }
+                            },
+                            {
+                                data: null, render: function (data, type, row) {
+                                    return "<i class='fas fa-edit' data-toggle='modal'data-target='#myModal' style='font-size:15px;color:green;'></i>&nbsp<i class='fas fa-trash-alt'style='font-size:15px;color:red;'onclick=DeleteUserbyId('" + row.userId + "');></i >";
+
+                                }
+                            },
+                        ]
+                    });
+                }
+            });
+        }
+        $.ajax({
+            url: '/api/JoinApi/DeleteUserbyId',
+            data: userId,
+            method: 'post',
+            dataType: 'json',
+            success: function (data, textStatus, xhr) {
+                if (data.Status==1) {
+                    toastr.success(data.Message);
+                    refreshTable();
+                  }
+                },
+                error: function (xhr, textStatus, errorThrown) {
+                    toastr.success(data.Message);
+            }
+
+        });
+
+    }
+    function AllUsers() {
+        var table;
+        var userid = '@Request.RequestContext.HttpContext.Session["UserID"]';
+        var userId = {
+            "userid": userid,
+        };
+        var table = $('#UsersList').DataTable();
+        $('#container').css('display', 'block');
+        table.columns.adjust().draw();
+
+        $.ajax({
+            url: '/api/JoinApi/AllUsers',
+            data: '',
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                table = $('#UsersList').dataTable({
+                    processing: true,
+                    paging: true,
+                    sort: true,
+                    searching: true,
+                    data: data.result,
+                    bDestroy: true,
+                    columns: [
+                        { "data": "userId", "autoWidth": false, "visible": false },
+                        { "data": "name", "autoWidth": false },
+                        { "data": "emailid", "autoWidth": false },
+                        { "data": "dob", "autoWidth": false },
+                        { "data": "address", "autoWidth": false },
+                        {
+                            "data": "profilepic", "render": function (data) {
+                                var profilepic;
+                                if (data != 'NA' && data != undefined) {
+                                    profilepic = data;
+                                }
+                                else {
+                                    profilepic = "";
+                                }
+
+                                return '<img class=".img-fluid .img-responsive .img-rounded" src="' + profilepic + '" style="height:44px;width:57px;"/>';
+                            }
+                        },
+
+                        {
+                            data: null, render: function (data, type, row) {
+                                return "<i class='fas fa-edit open-AddUserDialog' data-toggle='modal'data-target='#myModal' data-id='" + row.userId + "' style='font-size:15px;color:green;'></i>&nbsp<i class='fas fa-trash-alt'style='font-size:15px;color:red;'onclick=DeleteUserbyId('" + row.userId + "');></i >";
+                            }
+
+                        },
+                    ]
+                });
+            }
+        });
+    }
+    $(document).ready(function () {
+        var table;
+        var userid = '@Request.RequestContext.HttpContext.Session["UserID"]';
+        var userId = {
+            "userid": userid,
+        };
+        var table = $('#UsersList').DataTable();
+        $('#container').css('display', 'block');
+        table.columns.adjust().draw();
+        AllUsers();
+
+    });
+
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#cheque').click(function () {
+            if ($(this).is(':checked')) {
+                $(".cancelcheque").show("");
+                $(".bankdetail").hide("");
+            }
+        });
+
+        $('#bank').click(function () {
+            if ($(this).is(':checked')) {
+                $(".cancelcheque").hide("");
+                $(".bankdetail").show("");
+            }
+        });
+    });
+</script>
+
+<script>
+    $('body').on('hidden.bs.modal', '.modal', function () {
+        $(this).removeData('bs.modal');
+    });
+    $(document).on("click", ".open-AddUserDialog", function () {
+        var UserId1 = $(this).data('id');
+        var useridData = {
+            "UserId": UserId1
+        };
+
+        $.ajax({
+            url: '/api/UserWebApi/UserDetailByuserID',
+            type: 'POST',
+            dataType: 'json',
+            data: useridData,
+            success: function (r, textStatus, xhr) {
+                console.log(r)
+                if (r.Status == '1') {
+                    $('#Name').val(r.result.Name);
+                    $('#UserId').val(r.result.UserId);
+                    $('#EmailId').val(r.result.EmailId);
+                    $('#PhoneNumber').val(r.result.PhoneNumber);
+                    $('#Address').val(r.result.Address);
+                    $('#country').text(r.result.CountryName);
+                    $('#state').text(r.result.StateName);
+                    $('#city').text(r.result.CityName);
+                    $('#country').val(r.result.CountryID);
+                    $('#state').val(r.result.StateID);
+                    $('#city').val(r.result.CityID);
+                    var idp1 = r.result.Idproof1;
+                    if (r.result.Idproof1 != 'NA') {
+                        $('#idproof1').attr('src', idp1)
+                    }
+                    var idp2 = r.result.Idproof2;
+                    if (r.result.Idproof2 != 'NA') {
+                        $('#idproof2').attr('src', idp2)
+                    }
+                    var idp3 = r.result.CancelCheque;
+                    if (r.result.CancelCheque != 'NA') {
+                        $('#cancelCheque').attr('src', idp3);
+                    }
+
+                    $('#Dob').val(r.result.dob);
+
+                    $('#BankName').val(r.result.BankName);
+                    $('#AccountNumber').val(r.result.AccountNumber);
+                    $('#BankIFSCCode').val(r.result.BankIFSCCode);
+                    $('#BankBranchName').val(r.result.BankBranchName);
+
+                }
+                else {
+                    $("#massageotp").text(r.Message);
+                }
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                console.log('Error in Operation');
+            }
+        });
+
+        $('#btnupdateuser').click(function () {
+            event.preventDefault();
+            var emailRegex = /^([\w-\.]+@@([\w-]+\.)+[\w-]{2,4})?$/;
+            var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/;
+            var name = $('#Name').val();
+            var UserId = $('#UserId').val();
+            var emailId = $('#EmailId').val();
+            var zipcode = $('#Zipcode').val();
+            var dob = $('#Dob').val();
+            var phonenumber = $('#PhoneNumber').val();
+            var Address = $('#Address').val();
+            var Country = $("#ddlCountry :selected").val();
+            var State = $("#ddlState :selected").val();
+            var City = $("#ddlCity :selected").val();
+
+            var BankName = $('#BankName').val();
+
+            var rdobank = $("input[name='bank']:checked").val();
+            var AccountNumber = $('#AccountNumber').val();
+            var BankIFSCCode = $('#BankIFSCCode').val();
+            var BankBranchName = $('#BankBranchName').val();
+            $(".error-div").remove();
+
+            if (name == '') {
+                $("#Name").focus();
+                $("#Name").after('<span class="error-div row">*Please Enter Name.</span>');
+                return false;
+            } else if (emailId == '') {
+                $("#EmailId").focus();
+                $("#EmailId").after('<span class="error-div row">*Please enter the EmailId!</span>');
+                return false;
+            } else if (!emailRegex.test(emailId)) {
+                $("#EmailId").focus();
+                $("#EmailId").after('<span class="error-div row">*Please enter the valid Email!</span>');
+                return false;
+            }
+            else if (phonenumber == '') {
+                $("#PhoneNumber").focus();
+                $("#PhoneNumber").after('<span class="error-div row">*Please Enter the PhoneNumber!</span>');
+                return false;
+            }
+            else if (dob == '') {
+                $("#Dob").focus();
+                $("#Dob").after('<span class="error-div row">*Please Enter the Dob!</span>');
+                return false;
+            }
+            else if (Address == '') {
+                $("#Address").focus();
+                $("#Address").after('<span class="error-div row">*Please Enter the Address!</span>');
+                return false;
+            }
+            else if (Country == 'Select Country' || Country == '') {
+                $("#ddlCountry").focus();
+                $("#ddlCountry").after('<span class="error-div row">*Please Select Country!</span>');
+                return false;
+            } else if (State == 'Select State' || State == '') {
+                $("#ddlState").focus();
+                $("#ddlState").after('<span class="error-div row">*Please Select State!</span>');
+                return false;
+            } else if (City == 'Select City Name' || City == '') {
+                $("#City").focus();
+                $("#City").after('<span class="error-div row">*Please Select Year!</span>');
+                return false;
+            }
+
+            else if (rdobank == 'bank') {
+                if (BankName == '') {
+                    $("#BankName").focus();
+                    $("#BankName").after('<span class="error-div row">*Enter the Bank Name!</span>');
+                    return false;
+                }
+                else if (AccountNumber == '') {
+                    $("#AccountNumber").focus();
+                    $("#AccountNumber").after('<span class="error-div row">*Enter the Account Number!</span>');
+                    return false;
+                }
+                else if (BankIFSCCode == '') {
+                    $("#BankIFSCCode").focus();
+                    $("#BankIFSCCode").after('<span class="error-div row">*Enter the Bank IFSC Code!</span>');
+                    return false;
+                }
+                else if (BankBranchName == '') {
+                    $("#BankBranchName").focus();
+                    $("#BankBranchName").after('<span class="error-div row">*Enter the Bank Branch Name!</span>');
+                    return false;
+                }
+                else {
+                    //return true;
+                }
+            }
+
+            if ($(name != '' && emailId != '' && dob != '' && phonenumber != '')) {
+
+                if (idproofImage1 == "" && idproofImage2 == "") {
+
+                    idpimage1 = "";
+                    idpimage2 = "";
+                }
+                if (idproofImage1 != "" && idproofImage2 != "") {
+
+                    idpimage1 = idproofImage1.replace(/^data:(.*;base64,)?/, '');
+                    idpimage2 = idproofImage2.replace(/^data:(.*;base64,)?/, '');
+                }
+
+                if (idproofImage1 != "" && idproofImage2 == "") {
+                    idpimage1 = idproofImage1.replace(/^data:(.*;base64,)?/, '');
+                    idpimage2 = "";
+                }
+
+                if (idproofImage2 != "" && idproofImage1 == "") {
+                    idpimage2 = idproofImage2.replace(/^data:(.*;base64,)?/, '');
+                    idpimage1 = "";
+                }
+                if (idproofImage2 != "" && idproofImage1 == "") {
+                    idpimage2 = idproofImage2.replace(/^data:(.*;base64,)?/, '');
+                    idpimage1 = "";
+                }
+                if (Cancelcheq1 != "") {
+                    CancelCheq = Cancelcheq1.replace(/^data:(.*;base64,)?/, '');
+                } else { CancelCheq = ""; }
+                var UserUpdateData = {
+                    "UserId": UserId,
+                    "Idproof1": idpimage1,
+                    "Idproof2": idpimage2,
+                    "cancelCheque": CancelCheq,
+                    "Name": name,
+                    "EmailId": emailId,
+                    "Zipcode": zipcode,
+                    "Dob": dob,
+                    "PhoneNumber": phonenumber,
+                    "Address": Address,
+                    "CountryID": Country,
+                    "StateID": State,
+                    "CityID": City,
+                    "BankName": BankName,
+                    "AccountNumber": AccountNumber,
+                    "BankIFSCCode": BankIFSCCode,
+                    "BankBranchName": BankBranchName
+                };
+                $.ajax({
+                    url: '/api/UserWebApi/UpdateUserDetail',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: UserUpdateData,
+                    success: function (result, textStatus, xhr) {
+                        if (result.Status == '1') {
+                            $('#myModal').modal('hide');
+                            AllUsers();
+                            //window.location.href = "/api/JoinApi/AllUsers";
+                        }
+                        else if (result.Status == '2') {
+                            $("#massage").text(result.Message);
+                            $('#myModal').modal('hide');
+                            AllUsers();
+                        }
+                        else {
+                            $("#massage").text(result.Message);
+                            $('#myModal').modal('hide');
+                            AllUsers();
+                        }
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        console.log('Error in Operation');
+                    }
+                });
+            }
+        });
+
+    });
+
+    var idpimage1, idproofImage1 = "", idpimage2, idproofImage2 = "", CancelCheq="", Cancelcheq1 = "";
+    var userid = '@Request.RequestContext.HttpContext.Session["UserID"]';
+    //var UserById = $(this).data('id');
+    var ddlCountry = $('#ddlCountry');
+    ddlCountry.append($("<option></option>").val('').html('Please Select Country'));
+    $.ajax({
+        url: '/api/UserWebApi/CountriesList',
+        type: 'GET',
+        dataType: 'json',
+        //beforeSend: function (xhr) { xhr.setRequestHeader('X-Test-Header', 'test-value'); },
+        success: function (d) {
+            $.each(d, function (i, country) {
+                ddlCountry.append($("<option></option>").val(country.id).html(country.name));
+            });
+        },
+        error: function () {
+            alert('Error!');
+        }
+    });
+
+    //State details by country id
+
+    $("#ddlCountry").change(function () {
+        var CountryId = parseInt($(this).val());
+
+        if (!isNaN(CountryId)) {
+            var ddlState = $('#ddlState');
+            var ddlCity = $('#ddlCity');
+            ddlState.empty();
+            ddlState.append($("<option></option>").val('').html('Please wait ...'));
+            ddlCity.empty();
+            ddlCity.append($("<option></option>").val('').html('Select City'));
+
+            $.ajax({
+                url: '/api/UserWebApi/StatesByCountryID',
+                type: 'GET',
+                dataType: 'json',
+                //beforeSend: function (xhr) { xhr.setRequestHeader('X-Test-Header', 'test-value'); },
+                data: { CountryId: CountryId },
+                success: function (d) {
+                    ddlState.empty(); // Clear the please wait
+                    ddlState.append($("<option></option>").val('').html('Select State'));
+
+                    $.each(d, function (i, states) {
+                        ddlState.append($("<option></option>").val(states.id).html(states.name));
+                    });
+                },
+                error: function () {
+                    alert('Error!');
+                }
+            });
+        }
+    });
+    //City Bind By satate id
+    $("#ddlState").change(function () {
+        var StateId = parseInt($(this).val());
+        if (!isNaN(StateId)) {
+            var ddlCity = $('#ddlCity');
+            ddlCity.append($("<option></option>").val('').html('Please wait ...'));
+
+            $.ajax({
+                url: '/api/UserWebApi/CitiesByStateID',
+                type: 'GET',
+                dataType: 'json',
+                data: { stateId: StateId },
+                success: function (d) {
+                    ddlCity.empty();
+                    ddlCity.append($("<option></option>").val('').html('Select City'));
+                    $.each(d, function (i, cities) {
+                        ddlCity.append($("<option></option>").val(cities.id).html(cities.name));
+                    });
+                },
+                error: function () {
+                    alert('Error!');
+                }
+            });
+        }
+    });
+
+
+    var loadFileIDproof1 = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+
+            var output = document.getElementById('idproof1');
+            output.src = reader.result;
+            idproofImage1 = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    var loadFileIDproof2 = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            var output = document.getElementById('idproof2');
+            output.src = reader.result;
+
+            idproofImage2 = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+    var CancelCheque = function (event) {
+        var reader = new FileReader();
+        reader.onload = function () {
+            //cancelCheque
+            var output = document.getElementById('cancelCheque');
+            output.src = reader.result;
+            Cancelcheq1 = reader.result;
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    };
+
+</script>
